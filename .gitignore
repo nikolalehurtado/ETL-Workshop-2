@@ -18,3 +18,6 @@ logs/*
 .DS_Store
 Thumbs.db
 .vscode/
+
+# --- Airflow: configuracion generada automaticamente ---
+config/airflow.cfg
