@@ -1,0 +1,28 @@
+Prueba C - Re-ejecucion segura (seccion 7.3)
+Comando: docker compose exec postgres sh -c 'psql -U "$POSTGRES_USER" -d music_dw -f /sql/rerun_check.sql'
+Entorno: Docker Desktop local, Airflow 3.1.8, PostgreSQL 16 (2026-10-16)
+
+=== ANTES de la segunda ejecucion (DW cargado por el run manual__2026-10-16T03:22:28) ===
+ dim_artist | dim_track | fact_track_artist | fact_grammy_award | suma_popularity | promedio_energy | total_premios |       hash_llaves_artista
+------------+-----------+-------------------+-------------------+-----------------+-----------------+---------------+----------------------------------
+      30249 |     89206 |            156739 |              2771 |         5251467 |        0.638218 |          2771 | c5a726b4af4ba77881356409875e29e0
+
+ audit_id |                  run_id                  |           loaded_at           |            strategy             | fact_track_artist
+----------+------------------------------------------+-------------------------------+---------------------------------+-------------------
+        1 | manual__2026-10-16T03:22:28.016427+00:00 | 2026-10-16 03:24:19.202328+00 | transactional truncate-and-load | 156739
+
+(Nota: entre ambos momentos tambien corrio el DAG Run fallido de la Prueba B
+ manual__2026-10-16T18:41:50; no modifico el DW: sigue habiendo 1 sola carga.)
+
+=== DESPUES de re-ejecutar el DAG con el mismo lote (run manual__2026-10-16T18:50:18) ===
+ dim_artist | dim_track | fact_track_artist | fact_grammy_award | suma_popularity | promedio_energy | total_premios |       hash_llaves_artista
+------------+-----------+-------------------+-------------------+-----------------+-----------------+---------------+----------------------------------
+      30249 |     89206 |            156739 |              2771 |         5251467 |        0.638218 |          2771 | c5a726b4af4ba77881356409875e29e0
+
+ audit_id |                  run_id                  |           loaded_at           |            strategy             | fact_track_artist
+----------+------------------------------------------+-------------------------------+---------------------------------+-------------------
+        1 | manual__2026-10-16T03:22:28.016427+00:00 | 2026-10-16 03:24:19.202328+00 | transactional truncate-and-load | 156739
+        2 | manual__2026-10-16T18:50:18.058142+00:00 | 2026-10-16 18:53:23.547892+00 | transactional truncate-and-load | 156739
+
+Conclusion: se registraron 2 cargas, pero conteos, sumas, promedios y el hash de llaves
+subrogadas de dim_artist son identicos. La re-ejecucion no duplico ni altero el DW.

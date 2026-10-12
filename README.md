@@ -221,63 +221,104 @@ Tabla completa de condiciones y respuestas en [`docs/architecture.md`](docs/arch
 
 ## 12. Evidencia de ejecución exitosa
 
-**Prueba A:** *Trigger DAG* con los parámetros por defecto.
+**Prueba A** — DAG Run `manual__2026-10-16T03:22:28`, *Trigger* con parámetros por defecto, en el
+entorno Docker local. **Resultado: 8 de 8 tareas en `success`, duración 2 min 04 s.**
 
-| Etapa | Resultado esperado |
+| Etapa | Resultado observado |
 | --- | --- |
-| Extracción | Spotify 114,000 filas · Grammy 4,810 filas desde PostgreSQL |
-| Compuertas raw | Spotify ✅ · Grammy ✅ con Warning DQ13 |
-| Transformación | Reporte de integración (sección 8) |
+| Extracción | Spotify 114,000 filas (CSV) · Grammy 4,810 filas desde PostgreSQL `grammy_source` |
+| Compuertas raw | `spotify_raw_suite` ✅ · `grammy_raw_suite` ✅ con **Warning DQ13** (10.29 % de filas repetidas por año y categoría: lote 2019) → la política permite continuar |
+| Transformación | 433 filas de 2019 en cuarentena; 1,472 de 2,771 premios emparejados con Spotify (53.1 %) |
 | Compuerta preparada | ✅ las 3 suites |
-| Carga | `fact_track_artist` 156,739 · `fact_grammy_award` 2,771 · `dim_artist` 30,249 |
+| Carga | `fact_track_artist` 156,739 · `fact_grammy_award` 2,771 · `dim_artist` 30,249 → `COMMIT` |
 | Analítica | `kpi_summary.json` con las 4 vistas KPI |
 
-🚧 *Pantallazos de la ejecución en el entorno Docker: ver registro de evidencias (E03–E05).*
+![E03 — DAG Run exitoso: 8 tareas en success](docs/evidence/E03_success_grid.png)
+
+*E03 — Vista Grid: las 8 tareas con éxito, 0 tareas fallidas.*
+
+![E04 — Log de validate_grammys_raw](docs/evidence/E04_log_warning_dq13.png)
+
+*E04 — Log de `validate_grammys_raw`: GX evalúa cada regla con su `rule_id` y severidad. DQ13
+(Warning) falla por el lote 2019 y la política documentada permite continuar; la transformación
+aplica la cuarentena T09. El resultado completo queda en `gx/validation_results/<run_id>/`.*
 
 ## 13. Evidencia de falla controlada
 
-**Prueba B:** se viola la regla Critical **DQ04** (`popularity` entre 0 y 100) **sin tocar el
-archivo original**. Se crea una copia con una sola fila en `popularity = 150`:
+**Prueba B** — se viola la regla Critical **DQ04** (`popularity` entre 0 y 100) **sin tocar el
+archivo original**: se crea una copia con una sola fila en `popularity = 150`.
 
 ```powershell
 docker compose exec airflow-scheduler python /opt/airflow/src/make_bad_data.py
+# Lote de prueba creado: /opt/airflow/data/test/spotify_bad_popularity.csv
+# Fila 0 (track_id=5SuOikwiRyPMVoIQDJUgSV): popularity 73 -> 150
 ```
 
-Luego, en Airflow: **Trigger DAG → con configuración** → `spotify_file = spotify_bad_popularity.csv`.
+Luego, en Airflow: **Trigger** → parámetro `spotify_file = spotify_bad_popularity.csv`
+(DAG Run `manual__2026-10-16T18:41:50`).
 
-| Etapa | Resultado esperado |
-| --- | --- |
-| `extract_spotify` | ✅ success |
-| `validate_spotify_raw` | ❌ failed: `Validacion con severidad CRITICAL. Reglas violadas: ['DQ04']` |
-| `transform_and_integrate`, `validate_prepared`, `load_dw`, `publish_kpi_summary` | `upstream_failed` (no se ejecutan) |
-| Data Warehouse | Sin cambios (misma carga anterior) |
+| Tarea | Estado observado | Intento |
+| --- | --- | --- |
+| `extract_spotify`, `extract_grammys`, `validate_grammys_raw` | ✅ success | 1 |
+| `validate_spotify_raw` | ❌ **failed** | 1 (0 reintentos: falla determinista) |
+| `transform_and_integrate`, `validate_prepared`, `load_dw`, `publish_kpi_summary` | 🟠 **upstream_failed** | 0 (nunca se ejecutaron) |
+| Data Warehouse | Sin cambios (`etl_load_audit` siguió con 1 carga; ver E09) | — |
 
-**Por qué se bloquea:** una popularidad fuera del contrato de Spotify corrompería KPI-1 y KPI-6. GX
-detecta la violación, la política la clasifica como Critical y Airflow impide que se ejecute lo posterior.
+![E06 — DAG Run con falla controlada](docs/evidence/E06_failed_grid.png)
 
-🚧 *Pantallazos de Grid view, log y JSON de GX: ver E06–E08.*
+*E06 — La primera tarea fallida es `validate_spotify_raw`; las 4 tareas posteriores quedan en
+"Fallido en Upstream" con intento 0. A la izquierda se ven el run exitoso anterior (verde) y este
+(rojo) lado a lado.*
+
+![E07 — Log de la tarea fallida](docs/evidence/E07_log_dq04.png)
+
+*E07 — Log de `validate_spotify_raw`: GX valida 114,000 filas; todas las reglas pasan excepto
+`[FAIL] DQ04 critical` en `popularity` (0.0009 % = 1 fila). El resultado se guarda en JSON y la
+política lanza `Reglas violadas: ['DQ04']. El procesamiento posterior queda bloqueado.`*
+
+**Lectura de la falla (qué, dónde, por qué, qué pasó después):**
+
+1. **Qué y dónde:** la primera tarea en fallar fue `validate_spotify_raw`, la compuerta raw de Spotify.
+2. **Por qué:** una popularidad fuera del contrato de Spotify (0–100) corrompería directamente
+   KPI-1 (R1) y KPI-6 (R4). Por eso DQ04 es **Critical**, aunque afecte a una sola fila.
+3. **Quién hizo qué:** **GX detectó** la violación, **la política** (`enforce_policy`) la clasificó
+   como bloqueante y **Airflow aplicó** la dependencia: lo posterior no se ejecutó.
+4. **Reintentos:** ninguno. La tarea tiene `retries=0` porque el mismo archivo fallaría igual.
+5. **Recuperación:** se vuelve a disparar el DAG con el archivo original (Prueba C).
 
 ## 14. Estrategia de repetibilidad
 
 **Truncate-and-load transaccional:** dentro de una transacción se trunca y recarga el modelo, se
 concilian los conteos con los archivos preparados y se registra la carga en `etl_load_audit`. Luego
-`COMMIT`. Si algo falla, `ROLLBACK` y el DW queda como estaba.
+`COMMIT`. Si algo falla, `ROLLBACK` y el DW queda como estaba. Las llaves subrogadas son
+deterministas (1..n sobre la llave de negocio ordenada), así que el mismo lote recibe las mismas llaves.
 
-**Prueba C:** ejecutar el DAG dos veces con el mismo lote y comparar:
+**Prueba C** — se volvió a ejecutar el DAG con el mismo lote (`manual__2026-10-16T18:50:18`) y se
+comparó el DW antes y después con `sql/rerun_check.sql`:
 
 ```powershell
 docker compose exec postgres sh -c 'psql -U "$POSTGRES_USER" -d music_dw -f /sql/rerun_check.sql'
 ```
 
-| Medida | 1ª carga | 2ª carga |
+| Medida | Antes | Después |
 | --- | --- | --- |
+| `dim_artist` | 30,249 | 30,249 |
+| `dim_track` | 89,206 | 89,206 |
 | `fact_track_artist` | 156,739 | 156,739 |
 | `fact_grammy_award` | 2,771 | 2,771 |
 | `SUM(popularity)` | 5,251,467 | 5,251,467 |
-| Hash de llaves de `dim_artist` | `c5a726b4…` | `c5a726b4…` |
-| Filas en `etl_load_audit` | 1 | 2 |
+| `AVG(energy)` | 0.638218 | 0.638218 |
+| Hash de llaves de `dim_artist` | `c5a726b4af4b…` | `c5a726b4af4b…` |
+| Cargas en `etl_load_audit` | 1 | **2** |
 
-*(Valores de la verificación en el entorno de desarrollo; se repiten con los pantallazos E09.)*
+**Conclusión:** la segunda carga sí se ejecutó (la auditoría pasó de 1 a 2), pero el DW quedó
+idéntico. No se duplicaron filas, no cambiaron las medidas y cada artista conservó su llave
+subrogada. Además, el run fallido de la Prueba B, que ocurrió entre ambas mediciones, no dejó
+ninguna huella en el DW. Salida completa: [`docs/evidence/E09_rerun_check.txt`](docs/evidence/E09_rerun_check.txt).
+
+**¿Y si una carga falla a mitad de camino?** Se verificó forzando una violación de llave foránea en
+`fact_grammy_award` después de truncar y cargar las demás tablas: la transacción hizo `ROLLBACK`, el
+DW conservó la carga anterior completa y el error se clasificó como determinista (sin reintentos).
 
 ## 15. Dashboard y salidas analíticas
 
@@ -393,20 +434,22 @@ local con recursos limitados:
 
 ## 18. Registro de evidencias
 
+Todas las evidencias se tomaron en el entorno Docker local (Airflow 3.1.8, PostgreSQL 16) el 2026-10-15/16.
+
 | ID | Ejecución / tarea | Artefacto o ruta | Qué demuestra | Política / regla |
 | --- | --- | --- | --- | --- |
-| E01 | Arranque del entorno | `docs/evidence/E01_airflow_ui_salud.png` | Airflow 3.1.8 arranca y sus componentes están saludables | 6.2 — entorno reproducible |
-| E02 | Preparación de la fuente Grammy | Salida de `sql/source_setup.sql` (`COPY 4810`, `filas_cargadas = 4810`) | La fuente concilia con el CSV y el script no duplica | 6.2 — conciliación |
-| E03 | DAG Run exitoso | `docs/evidence/E03_success_grid.png` | Las 8 tareas en `success` | Prueba A |
-| E04 | `validate_grammys_raw` (run exitoso) | `docs/evidence/E04_log_warning_dq13.png` + JSON de GX | La Warning DQ13 se registra y la política permite continuar | DQ13 · Warning |
-| E05 | `load_dw` (run exitoso) | `docs/evidence/E05_log_load_dw.png` | Conteos antes/después y COMMIT | 6.10 |
-| E06 | DAG Run con `spotify_bad_popularity.csv` | `docs/evidence/E06_failed_grid.png` | `validate_spotify_raw` failed, posteriores `upstream_failed` | Prueba B |
-| E07 | `validate_spotify_raw` (run fallido) | `docs/evidence/E07_log_dq04.png` | El log nombra DQ04 como regla Critical violada | DQ04 · Critical |
-| E08 | Resultado GX del run fallido | `docs/evidence/E08_gx_spotify_raw_failed.json` | Evidencia legible por máquina de la falla | 6.6 |
-| E09 | Dos runs exitosos seguidos | `docs/evidence/E09_rerun_check.png` | Mismos conteos, medidas y llaves | Prueba C |
+| E01 | Arranque del entorno | [`E01_airflow_ui_salud.png`](docs/evidence/E01_airflow_ui_salud.png) | Base de metadatos, scheduler y dag-processor saludables (Triggerer eliminado a propósito, sección 17) | 6.2 — entorno reproducible |
+| E02 | Preparación de la fuente Grammy | Salida de `sql/source_setup.sql` (sección 3) | `COPY 4810` = 4,810 filas del CSV; re-ejecutar no duplica | 6.2 — conciliación |
+| E03 | `manual__2026-10-16T03:22:28` | [`E03_success_grid.png`](docs/evidence/E03_success_grid.png) | 8/8 tareas en success, 0 fallidas, 2 min 04 s | Prueba A |
+| E03b | Estructura del DAG | [`E03b_dag_graph.png`](docs/evidence/E03b_dag_graph.png) | Dos ramas de origen que convergen en `transform_and_integrate` | Sección 5 / 8.3 |
+| E04 | `validate_grammys_raw` (run exitoso) | [`E04_log_warning_dq13.png`](docs/evidence/E04_log_warning_dq13.png) | Resultado GX por regla; Warning DQ13 registrada y la política continúa | DQ13 · Warning |
+| E06 | `manual__2026-10-16T18:41:50` | [`E06_failed_grid.png`](docs/evidence/E06_failed_grid.png) | `validate_spotify_raw` failed; 4 tareas posteriores upstream_failed con intento 0 | Prueba B |
+| E07 | `validate_spotify_raw` (run fallido) | [`E07_log_dq04.png`](docs/evidence/E07_log_dq04.png) | `[FAIL] DQ04 critical` (1 fila) y excepción que bloquea lo posterior | DQ04 · Critical |
+| E08 | Resultados GX de ambos runs | `docs/evidence/gx_results/` | Evidencia de validación legible por máquina (éxito y falla) | 6.6 |
+| E09 | `manual__2026-10-16T18:50:18` vs. carga anterior | [`E09_rerun_check.txt`](docs/evidence/E09_rerun_check.txt) | Mismos conteos, medidas y llaves tras re-ejecutar; 2 cargas auditadas | Prueba C |
 | E10 | Dashboard | `docs/evidence/E10_dashboard.png` | KPIs consultando `music_dw` | 8.1 |
 
-🚧 *E03–E10 se capturan en el entorno Docker.*
+🚧 *Pendientes: E08 (copiar los JSON de GX de ambos runs) y E10 (dashboard).*
 
 ## 19. Matriz de trazabilidad de extremo a extremo
 
