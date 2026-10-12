@@ -1,0 +1,261 @@
+{
+  "run_id": "manual__2026-10-16T03:22:28.016427+00:00",
+  "suite": "prepared_fact_grammy_award_suite",
+  "validated_at": "2026-10-16T03:24:14.173604+00:00",
+  "rows_validated": 2771,
+  "success": true,
+  "max_failure_severity": null,
+  "statistics": {
+    "evaluated_expectations": 5,
+    "successful_expectations": 5,
+    "unsuccessful_expectations": 0,
+    "success_percent": 100.0
+  },
+  "rules": [
+    {
+      "rule_id": "DQ16",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_not_be_null",
+      "column": "artist_key",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ16",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_not_be_null",
+      "column": "category_key",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ16",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_not_be_null",
+      "column": "year_key",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ19",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_between",
+      "column": "records_in_year_category",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ21",
+      "severity": "warning",
+      "expectation": "expect_column_mean_to_be_between",
+      "column": "matched_spotify",
+      "success": true,
+      "unexpected_count": null,
+      "unexpected_percent": null,
+      "observed_value": 0.5312161674485745,
+      "exception": false
+    }
+  ],
+  "gx_result": {
+    "success": true,
+    "results": [
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_not_be_null",
+          "kwargs": {
+            "batch_id": "prepared_fact_grammy_award_suite_source-prepared_fact_grammy_award_suite_asset",
+            "column": "artist_key"
+          },
+          "meta": {
+            "rule_id": "DQ16"
+          },
+          "id": "2440f5b6-d343-4802-b53b-d03b8a0fd2f8",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 2771,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_not_be_null",
+          "kwargs": {
+            "batch_id": "prepared_fact_grammy_award_suite_source-prepared_fact_grammy_award_suite_asset",
+            "column": "category_key"
+          },
+          "meta": {
+            "rule_id": "DQ16"
+          },
+          "id": "89a9179c-7aa0-4ea6-9170-fa19ef6c7401",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 2771,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_not_be_null",
+          "kwargs": {
+            "batch_id": "prepared_fact_grammy_award_suite_source-prepared_fact_grammy_award_suite_asset",
+            "column": "year_key"
+          },
+          "meta": {
+            "rule_id": "DQ16"
+          },
+          "id": "76ffe02d-344c-4c89-90b8-02977dfb64a8",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 2771,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_between",
+          "kwargs": {
+            "batch_id": "prepared_fact_grammy_award_suite_source-prepared_fact_grammy_award_suite_asset",
+            "column": "records_in_year_category",
+            "min_value": 1.0,
+            "max_value": 2.0
+          },
+          "meta": {
+            "rule_id": "DQ19"
+          },
+          "id": "a56600e6-d5ba-41cc-ab0a-e7de2f739fb7",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 2771,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_mean_to_be_between",
+          "kwargs": {
+            "batch_id": "prepared_fact_grammy_award_suite_source-prepared_fact_grammy_award_suite_asset",
+            "column": "matched_spotify",
+            "min_value": 0.4,
+            "max_value": 0.7
+          },
+          "meta": {
+            "rule_id": "DQ21"
+          },
+          "id": "6f18d2a6-78fe-411e-bb82-527ac764c396",
+          "severity": "warning"
+        },
+        "result": {
+          "observed_value": 0.5312161674485745
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      }
+    ],
+    "suite_name": "prepared_fact_grammy_award_suite",
+    "suite_parameters": {},
+    "statistics": {
+      "evaluated_expectations": 5,
+      "successful_expectations": 5,
+      "unsuccessful_expectations": 0,
+      "success_percent": 100.0
+    },
+    "meta": {
+      "great_expectations_version": "1.23.1",
+      "batch_spec": {
+        "batch_data": "PandasDataFrame"
+      },
+      "batch_markers": {
+        "ge_load_time": "20261016T032413.948348Z",
+        "pandas_data_fingerprint": "94df685b86d5271eb2a9af2c3d3e2a45"
+      },
+      "active_batch_definition": {
+        "datasource_name": "prepared_fact_grammy_award_suite_source",
+        "data_connector_name": "fluent",
+        "data_asset_name": "prepared_fact_grammy_award_suite_asset",
+        "batch_identifiers": {
+          "dataframe": "<DATAFRAME>"
+        }
+      },
+      "validation_id": "22252f42-8894-420e-9ebc-b927b0c6a74e",
+      "checkpoint_id": null,
+      "run_id": {
+        "run_name": null,
+        "run_time": "2026-10-16T03:24:14.065917+00:00"
+      },
+      "validation_time": "2026-10-16T03:24:14.065917+00:00",
+      "batch_parameters": {
+        "dataframe": "<DATAFRAME>"
+      }
+    },
+    "id": null
+  }
+}

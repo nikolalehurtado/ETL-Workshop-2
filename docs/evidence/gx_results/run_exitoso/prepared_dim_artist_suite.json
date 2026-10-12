@@ -1,0 +1,234 @@
+{
+  "run_id": "manual__2026-10-16T03:22:28.016427+00:00",
+  "suite": "prepared_dim_artist_suite",
+  "validated_at": "2026-10-16T03:24:15.056518+00:00",
+  "rows_validated": 30249,
+  "success": true,
+  "max_failure_severity": null,
+  "statistics": {
+    "evaluated_expectations": 4,
+    "successful_expectations": 4,
+    "unsuccessful_expectations": 0,
+    "success_percent": 100.0
+  },
+  "rules": [
+    {
+      "rule_id": "DQ20",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_in_set",
+      "column": "is_grammy_winner",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ20",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_unique",
+      "column": "artist_name_norm",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ20",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_unique",
+      "column": "artist_key",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ20",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_not_be_null",
+      "column": "artist_name_norm",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    }
+  ],
+  "gx_result": {
+    "success": true,
+    "results": [
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_not_be_null",
+          "kwargs": {
+            "batch_id": "prepared_dim_artist_suite_source-prepared_dim_artist_suite_asset",
+            "column": "artist_name_norm"
+          },
+          "meta": {
+            "rule_id": "DQ20"
+          },
+          "id": "4d970a68-06ee-4703-bcb1-7802c3486701",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 30249,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_unique",
+          "kwargs": {
+            "batch_id": "prepared_dim_artist_suite_source-prepared_dim_artist_suite_asset",
+            "column": "artist_name_norm"
+          },
+          "meta": {
+            "rule_id": "DQ20"
+          },
+          "id": "d05db2c8-7671-45fd-859f-b18176ed1544",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 30249,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_unique",
+          "kwargs": {
+            "batch_id": "prepared_dim_artist_suite_source-prepared_dim_artist_suite_asset",
+            "column": "artist_key"
+          },
+          "meta": {
+            "rule_id": "DQ20"
+          },
+          "id": "e52927dd-4386-4df5-b21b-5aabdc7f4f0d",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 30249,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_in_set",
+          "kwargs": {
+            "batch_id": "prepared_dim_artist_suite_source-prepared_dim_artist_suite_asset",
+            "column": "is_grammy_winner",
+            "value_set": [
+              true,
+              false
+            ]
+          },
+          "meta": {
+            "rule_id": "DQ20"
+          },
+          "id": "234ce195-12fc-49bd-aa6c-d19cf9d0ddcb",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 30249,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      }
+    ],
+    "suite_name": "prepared_dim_artist_suite",
+    "suite_parameters": {},
+    "statistics": {
+      "evaluated_expectations": 4,
+      "successful_expectations": 4,
+      "unsuccessful_expectations": 0,
+      "success_percent": 100.0
+    },
+    "meta": {
+      "great_expectations_version": "1.23.1",
+      "batch_spec": {
+        "batch_data": "PandasDataFrame"
+      },
+      "batch_markers": {
+        "ge_load_time": "20261016T032414.597421Z",
+        "pandas_data_fingerprint": "92af4044413c22b31b61aed1025bc4d2"
+      },
+      "active_batch_definition": {
+        "datasource_name": "prepared_dim_artist_suite_source",
+        "data_connector_name": "fluent",
+        "data_asset_name": "prepared_dim_artist_suite_asset",
+        "batch_identifiers": {
+          "dataframe": "<DATAFRAME>"
+        }
+      },
+      "validation_id": "ed72cc25-c7d4-4311-bc24-a5d1935d9516",
+      "checkpoint_id": null,
+      "run_id": {
+        "run_name": null,
+        "run_time": "2026-10-16T03:24:14.931363+00:00"
+      },
+      "validation_time": "2026-10-16T03:24:14.931363+00:00",
+      "batch_parameters": {
+        "dataframe": "<DATAFRAME>"
+      }
+    },
+    "id": null
+  }
+}

@@ -1,0 +1,513 @@
+{
+  "run_id": "manual__2026-10-16T03:22:28.016427+00:00",
+  "suite": "grammy_raw_suite",
+  "validated_at": "2026-10-16T03:23:04.048857+00:00",
+  "rows_validated": 4810,
+  "success": false,
+  "max_failure_severity": "warning",
+  "statistics": {
+    "evaluated_expectations": 6,
+    "successful_expectations": 5,
+    "unsuccessful_expectations": 1,
+    "success_percent": 83.33333333333334
+  },
+  "rules": [
+    {
+      "rule_id": "DQ09",
+      "severity": "critical",
+      "expectation": "expect_table_columns_to_match_set",
+      "column": null,
+      "success": true,
+      "unexpected_count": null,
+      "unexpected_percent": null,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ10",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_between",
+      "column": "year",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ10",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_not_be_null",
+      "column": "year",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ11",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_not_be_null",
+      "column": "category",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ12",
+      "severity": "warning",
+      "expectation": "expect_column_values_to_not_be_null",
+      "column": "artist",
+      "success": true,
+      "unexpected_count": 1840,
+      "unexpected_percent": 38.2536,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ13",
+      "severity": "warning",
+      "expectation": "expect_compound_columns_to_be_unique",
+      "column": [
+        "year",
+        "category"
+      ],
+      "success": false,
+      "unexpected_count": 495,
+      "unexpected_percent": 10.2911,
+      "observed_value": null,
+      "exception": false
+    }
+  ],
+  "gx_result": {
+    "success": false,
+    "results": [
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_table_columns_to_match_set",
+          "kwargs": {
+            "batch_id": "grammy_raw_suite_source-grammy_raw_suite_asset",
+            "column_set": [
+              "year",
+              "title",
+              "category",
+              "nominee",
+              "artist",
+              "winner"
+            ],
+            "exact_match": false
+          },
+          "meta": {
+            "rule_id": "DQ09"
+          },
+          "id": "c87b0b9b-221d-42fe-a47e-213d7cdf39f7",
+          "severity": "critical"
+        },
+        "result": {
+          "observed_value": [
+            "artist",
+            "category",
+            "img",
+            "nominee",
+            "published_at",
+            "source_id",
+            "title",
+            "updated_at",
+            "winner",
+            "workers",
+            "year"
+          ],
+          "details": {
+            "mismatched": {
+              "unexpected": [
+                "img",
+                "published_at",
+                "source_id",
+                "updated_at",
+                "workers"
+              ]
+            }
+          }
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": false,
+        "expectation_config": {
+          "type": "expect_compound_columns_to_be_unique",
+          "kwargs": {
+            "batch_id": "grammy_raw_suite_source-grammy_raw_suite_asset",
+            "column_list": [
+              "year",
+              "category"
+            ],
+            "mostly": 0.98
+          },
+          "meta": {
+            "rule_id": "DQ13"
+          },
+          "id": "bb206bf3-2f3d-47e4-a49a-1e58ce90de66",
+          "severity": "warning"
+        },
+        "result": {
+          "element_count": 4810,
+          "unexpected_count": 495,
+          "unexpected_percent": 10.291060291060292,
+          "partial_unexpected_list": [
+            {
+              "year": 2019,
+              "category": "Record Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Record Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Record Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Record Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Record Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Record Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Record Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Record Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Album Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Album Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Album Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Album Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Album Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Album Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Album Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Album Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Song Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Song Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Song Of The Year"
+            },
+            {
+              "year": 2019,
+              "category": "Song Of The Year"
+            }
+          ],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 10.291060291060292,
+          "unexpected_percent_nonmissing": 10.291060291060292,
+          "partial_unexpected_counts": [
+            {
+              "value": [
+                2019,
+                "Album Of The Year"
+              ],
+              "count": 8
+            },
+            {
+              "value": [
+                2019,
+                "Record Of The Year"
+              ],
+              "count": 8
+            },
+            {
+              "value": [
+                2019,
+                "Song Of The Year"
+              ],
+              "count": 4
+            }
+          ],
+          "partial_unexpected_index_list": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_not_be_null",
+          "kwargs": {
+            "batch_id": "grammy_raw_suite_source-grammy_raw_suite_asset",
+            "column": "year"
+          },
+          "meta": {
+            "rule_id": "DQ10"
+          },
+          "id": "fb0b420e-1ac7-4b57-b223-0dd2ede67d73",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 4810,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_between",
+          "kwargs": {
+            "batch_id": "grammy_raw_suite_source-grammy_raw_suite_asset",
+            "column": "year",
+            "min_value": 1958.0,
+            "max_value": 2026.0
+          },
+          "meta": {
+            "rule_id": "DQ10"
+          },
+          "id": "e3700770-8626-4884-928d-18e200966b45",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 4810,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_not_be_null",
+          "kwargs": {
+            "batch_id": "grammy_raw_suite_source-grammy_raw_suite_asset",
+            "column": "category"
+          },
+          "meta": {
+            "rule_id": "DQ11"
+          },
+          "id": "014a66c4-dfc9-40ec-9d86-1ddf2f06ea27",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 4810,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_not_be_null",
+          "kwargs": {
+            "batch_id": "grammy_raw_suite_source-grammy_raw_suite_asset",
+            "column": "artist",
+            "mostly": 0.55
+          },
+          "meta": {
+            "rule_id": "DQ12"
+          },
+          "id": "7c750594-5025-47f7-9133-203a9d9e1e57",
+          "severity": "warning"
+        },
+        "result": {
+          "element_count": 4810,
+          "unexpected_count": 1840,
+          "unexpected_percent": 38.25363825363826,
+          "partial_unexpected_list": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "partial_unexpected_counts": [
+            {
+              "value": null,
+              "count": 20
+            }
+          ],
+          "partial_unexpected_index_list": [
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            77,
+            78,
+            79,
+            80
+          ]
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      }
+    ],
+    "suite_name": "grammy_raw_suite",
+    "suite_parameters": {},
+    "statistics": {
+      "evaluated_expectations": 6,
+      "successful_expectations": 5,
+      "unsuccessful_expectations": 1,
+      "success_percent": 83.33333333333334
+    },
+    "meta": {
+      "great_expectations_version": "1.23.1",
+      "batch_spec": {
+        "batch_data": "PandasDataFrame"
+      },
+      "batch_markers": {
+        "ge_load_time": "20261016T032303.744544Z",
+        "pandas_data_fingerprint": "ac8cdc844779bb2a6c6acfc30f881808"
+      },
+      "active_batch_definition": {
+        "datasource_name": "grammy_raw_suite_source",
+        "data_connector_name": "fluent",
+        "data_asset_name": "grammy_raw_suite_asset",
+        "batch_identifiers": {
+          "dataframe": "<DATAFRAME>"
+        }
+      },
+      "validation_id": "1a2626fc-7015-4e5c-839e-63fa75e24478",
+      "checkpoint_id": null,
+      "run_id": {
+        "run_name": null,
+        "run_time": "2026-10-16T03:23:03.972723+00:00"
+      },
+      "validation_time": "2026-10-16T03:23:03.972723+00:00",
+      "batch_parameters": {
+        "dataframe": "<DATAFRAME>"
+      }
+    },
+    "id": null
+  }
+}

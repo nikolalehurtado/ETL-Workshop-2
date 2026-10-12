@@ -1,0 +1,997 @@
+{
+  "run_id": "manual__2026-10-16T03:22:28.016427+00:00",
+  "suite": "spotify_raw_suite",
+  "validated_at": "2026-10-16T03:23:07.902801+00:00",
+  "rows_validated": 114000,
+  "success": true,
+  "max_failure_severity": null,
+  "statistics": {
+    "evaluated_expectations": 15,
+    "successful_expectations": 15,
+    "unsuccessful_expectations": 0,
+    "success_percent": 100.0
+  },
+  "rules": [
+    {
+      "rule_id": "DQ01",
+      "severity": "critical",
+      "expectation": "expect_table_columns_to_match_set",
+      "column": null,
+      "success": true,
+      "unexpected_count": null,
+      "unexpected_percent": null,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ02",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_not_be_null",
+      "column": "track_id",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ03",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_not_be_null",
+      "column": "artists",
+      "success": true,
+      "unexpected_count": 1,
+      "unexpected_percent": 0.0009,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ04",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_between",
+      "column": "popularity",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ05",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_between",
+      "column": "danceability",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ05",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_between",
+      "column": "energy",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ05",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_between",
+      "column": "speechiness",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ05",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_between",
+      "column": "acousticness",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ05",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_between",
+      "column": "instrumentalness",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ05",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_between",
+      "column": "liveness",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ05",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_be_between",
+      "column": "valence",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ06",
+      "severity": "critical",
+      "expectation": "expect_column_values_to_not_be_null",
+      "column": "track_genre",
+      "success": true,
+      "unexpected_count": 0,
+      "unexpected_percent": 0.0,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ07",
+      "severity": "warning",
+      "expectation": "expect_compound_columns_to_be_unique",
+      "column": [
+        "track_id",
+        "track_genre"
+      ],
+      "success": true,
+      "unexpected_count": 894,
+      "unexpected_percent": 0.7842,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ08",
+      "severity": "warning",
+      "expectation": "expect_column_values_to_be_between",
+      "column": "tempo",
+      "success": true,
+      "unexpected_count": 157,
+      "unexpected_percent": 0.1377,
+      "observed_value": null,
+      "exception": false
+    },
+    {
+      "rule_id": "DQ22",
+      "severity": "info",
+      "expectation": "expect_column_mean_to_be_between",
+      "column": "popularity",
+      "success": true,
+      "unexpected_count": null,
+      "unexpected_percent": null,
+      "observed_value": 33.2385350877193,
+      "exception": false
+    }
+  ],
+  "gx_result": {
+    "success": true,
+    "results": [
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_table_columns_to_match_set",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column_set": [
+              "track_id",
+              "artists",
+              "album_name",
+              "track_name",
+              "popularity",
+              "duration_ms",
+              "explicit",
+              "tempo",
+              "loudness",
+              "time_signature",
+              "track_genre",
+              "danceability",
+              "energy",
+              "speechiness",
+              "acousticness",
+              "instrumentalness",
+              "liveness",
+              "valence"
+            ],
+            "exact_match": false
+          },
+          "meta": {
+            "rule_id": "DQ01"
+          },
+          "id": "b0405c54-372b-4b28-998d-b66741e09222",
+          "severity": "critical"
+        },
+        "result": {
+          "observed_value": [
+            "Unnamed: 0",
+            "acousticness",
+            "album_name",
+            "artists",
+            "danceability",
+            "duration_ms",
+            "energy",
+            "explicit",
+            "instrumentalness",
+            "key",
+            "liveness",
+            "loudness",
+            "mode",
+            "popularity",
+            "speechiness",
+            "tempo",
+            "time_signature",
+            "track_genre",
+            "track_id",
+            "track_name",
+            "valence"
+          ],
+          "details": {
+            "mismatched": {
+              "unexpected": [
+                "Unnamed: 0",
+                "key",
+                "mode"
+              ]
+            }
+          }
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_compound_columns_to_be_unique",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column_list": [
+              "track_id",
+              "track_genre"
+            ],
+            "mostly": 0.99
+          },
+          "meta": {
+            "rule_id": "DQ07"
+          },
+          "id": "78f6b4de-21de-4761-837b-7c7d66238e9a",
+          "severity": "warning"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 894,
+          "unexpected_percent": 0.7842105263157895,
+          "partial_unexpected_list": [
+            {
+              "track_id": "0CDucx9lKxuCZplLXUz0iX",
+              "track_genre": "afrobeat"
+            },
+            {
+              "track_id": "0CDucx9lKxuCZplLXUz0iX",
+              "track_genre": "afrobeat"
+            },
+            {
+              "track_id": "2aibwv5hGXSgw7Yru8IYTO",
+              "track_genre": "alt-rock"
+            },
+            {
+              "track_id": "2aibwv5hGXSgw7Yru8IYTO",
+              "track_genre": "alt-rock"
+            },
+            {
+              "track_id": "7mULVp0DJrI2Nd6GesLvxn",
+              "track_genre": "alternative"
+            },
+            {
+              "track_id": "7mULVp0DJrI2Nd6GesLvxn",
+              "track_genre": "alternative"
+            },
+            {
+              "track_id": "6d3RIvHfVkoOtW1WHXmbX3",
+              "track_genre": "ambient"
+            },
+            {
+              "track_id": "6d3RIvHfVkoOtW1WHXmbX3",
+              "track_genre": "ambient"
+            },
+            {
+              "track_id": "481beimUiUnMUzSbOAFcUT",
+              "track_genre": "anime"
+            },
+            {
+              "track_id": "481beimUiUnMUzSbOAFcUT",
+              "track_genre": "anime"
+            },
+            {
+              "track_id": "57QCT8L3kFQiN4AXkBRJxW",
+              "track_genre": "black-metal"
+            },
+            {
+              "track_id": "57QCT8L3kFQiN4AXkBRJxW",
+              "track_genre": "black-metal"
+            },
+            {
+              "track_id": "3RIeNvIwO6ZRMLiwla7DdY",
+              "track_genre": "black-metal"
+            },
+            {
+              "track_id": "3RIeNvIwO6ZRMLiwla7DdY",
+              "track_genre": "black-metal"
+            },
+            {
+              "track_id": "6FmQMYlxRl56FIgOwvRBil",
+              "track_genre": "black-metal"
+            },
+            {
+              "track_id": "6FmQMYlxRl56FIgOwvRBil",
+              "track_genre": "black-metal"
+            },
+            {
+              "track_id": "6laLzRAweI0HEOYDMO4Kds",
+              "track_genre": "bluegrass"
+            },
+            {
+              "track_id": "6laLzRAweI0HEOYDMO4Kds",
+              "track_genre": "bluegrass"
+            },
+            {
+              "track_id": "5Aq43Qi1j27J5KQkKYYKq0",
+              "track_genre": "bluegrass"
+            },
+            {
+              "track_id": "5Aq43Qi1j27J5KQkKYYKq0",
+              "track_genre": "bluegrass"
+            }
+          ],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.7842105263157895,
+          "unexpected_percent_nonmissing": 0.7842105263157895,
+          "partial_unexpected_counts": [
+            {
+              "value": [
+                "0CDucx9lKxuCZplLXUz0iX",
+                "afrobeat"
+              ],
+              "count": 2
+            },
+            {
+              "value": [
+                "2aibwv5hGXSgw7Yru8IYTO",
+                "alt-rock"
+              ],
+              "count": 2
+            },
+            {
+              "value": [
+                "3RIeNvIwO6ZRMLiwla7DdY",
+                "black-metal"
+              ],
+              "count": 2
+            },
+            {
+              "value": [
+                "481beimUiUnMUzSbOAFcUT",
+                "anime"
+              ],
+              "count": 2
+            },
+            {
+              "value": [
+                "57QCT8L3kFQiN4AXkBRJxW",
+                "black-metal"
+              ],
+              "count": 2
+            },
+            {
+              "value": [
+                "5Aq43Qi1j27J5KQkKYYKq0",
+                "bluegrass"
+              ],
+              "count": 2
+            },
+            {
+              "value": [
+                "6FmQMYlxRl56FIgOwvRBil",
+                "black-metal"
+              ],
+              "count": 2
+            },
+            {
+              "value": [
+                "6d3RIvHfVkoOtW1WHXmbX3",
+                "ambient"
+              ],
+              "count": 2
+            },
+            {
+              "value": [
+                "6laLzRAweI0HEOYDMO4Kds",
+                "bluegrass"
+              ],
+              "count": 2
+            },
+            {
+              "value": [
+                "7mULVp0DJrI2Nd6GesLvxn",
+                "alternative"
+              ],
+              "count": 2
+            }
+          ],
+          "partial_unexpected_index_list": [
+            1874,
+            1925,
+            2109,
+            2155,
+            3683,
+            3738,
+            4598,
+            4648,
+            5721,
+            5769,
+            6090,
+            6134,
+            6501,
+            6557,
+            6803,
+            6856,
+            7299,
+            7347,
+            7794,
+            7844
+          ]
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_not_be_null",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "track_id"
+          },
+          "meta": {
+            "rule_id": "DQ02"
+          },
+          "id": "e064c3e9-02d7-4c05-9d9c-860f869ba3ee",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_not_be_null",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "artists",
+            "mostly": 0.999
+          },
+          "meta": {
+            "rule_id": "DQ03"
+          },
+          "id": "390b7032-9d96-46a9-9483-7924f84b391b",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 1,
+          "unexpected_percent": 0.0008771929824561403,
+          "partial_unexpected_list": [
+            null
+          ],
+          "partial_unexpected_counts": [
+            {
+              "value": null,
+              "count": 1
+            }
+          ],
+          "partial_unexpected_index_list": [
+            65900
+          ]
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_between",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "popularity",
+            "min_value": 0.0,
+            "max_value": 100.0
+          },
+          "meta": {
+            "rule_id": "DQ04"
+          },
+          "id": "6a4f9852-350c-4fa0-af72-34cfdf1a43a9",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_mean_to_be_between",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "popularity",
+            "min_value": 25.0,
+            "max_value": 45.0
+          },
+          "meta": {
+            "rule_id": "DQ22"
+          },
+          "id": "a6983117-84df-495f-8c60-13913a65d229",
+          "severity": "info"
+        },
+        "result": {
+          "observed_value": 33.2385350877193
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_not_be_null",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "track_genre"
+          },
+          "meta": {
+            "rule_id": "DQ06"
+          },
+          "id": "2e4ea8da-af66-45d4-9f2b-e02edce0aef4",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_between",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "tempo",
+            "mostly": 0.995,
+            "min_value": 0.0,
+            "strict_min": true
+          },
+          "meta": {
+            "rule_id": "DQ08"
+          },
+          "id": "508a0070-4299-4ac8-a8cf-9639482df2e1",
+          "severity": "warning"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 157,
+          "unexpected_percent": 0.13771929824561402,
+          "partial_unexpected_list": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.13771929824561402,
+          "unexpected_percent_nonmissing": 0.13771929824561402,
+          "partial_unexpected_counts": [
+            {
+              "value": 0.0,
+              "count": 20
+            }
+          ],
+          "partial_unexpected_index_list": [
+            4131,
+            4379,
+            4664,
+            45670,
+            45720,
+            45729,
+            45773,
+            59221,
+            59310,
+            59473,
+            59812,
+            64826,
+            76716,
+            76736,
+            93111,
+            98779,
+            101041,
+            101043,
+            101048,
+            101057
+          ]
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_between",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "danceability",
+            "min_value": 0.0,
+            "max_value": 1.0
+          },
+          "meta": {
+            "rule_id": "DQ05"
+          },
+          "id": "c8e72272-3dc3-4fd2-9338-f7e35bd0b2ee",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_between",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "energy",
+            "min_value": 0.0,
+            "max_value": 1.0
+          },
+          "meta": {
+            "rule_id": "DQ05"
+          },
+          "id": "7ff1855a-a7cc-4ac3-ae78-113696b20efe",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_between",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "speechiness",
+            "min_value": 0.0,
+            "max_value": 1.0
+          },
+          "meta": {
+            "rule_id": "DQ05"
+          },
+          "id": "c1e2c1e5-85aa-4d3c-b33e-ad422118e897",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_between",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "acousticness",
+            "min_value": 0.0,
+            "max_value": 1.0
+          },
+          "meta": {
+            "rule_id": "DQ05"
+          },
+          "id": "a3214137-a90d-442a-ab7e-2826e1a6ef33",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_between",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "instrumentalness",
+            "min_value": 0.0,
+            "max_value": 1.0
+          },
+          "meta": {
+            "rule_id": "DQ05"
+          },
+          "id": "d7293d96-98b6-4d51-8a6b-6ea81b5276a7",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_between",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "liveness",
+            "min_value": 0.0,
+            "max_value": 1.0
+          },
+          "meta": {
+            "rule_id": "DQ05"
+          },
+          "id": "d912eca9-67c9-4d31-bc5c-33b9fcf611ec",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      },
+      {
+        "success": true,
+        "expectation_config": {
+          "type": "expect_column_values_to_be_between",
+          "kwargs": {
+            "batch_id": "spotify_raw_suite_source-spotify_raw_suite_asset",
+            "column": "valence",
+            "min_value": 0.0,
+            "max_value": 1.0
+          },
+          "meta": {
+            "rule_id": "DQ05"
+          },
+          "id": "d2c08c09-644d-4ca2-8687-d0e07a138643",
+          "severity": "critical"
+        },
+        "result": {
+          "element_count": 114000,
+          "unexpected_count": 0,
+          "unexpected_percent": 0.0,
+          "partial_unexpected_list": [],
+          "missing_count": 0,
+          "missing_percent": 0.0,
+          "unexpected_percent_total": 0.0,
+          "unexpected_percent_nonmissing": 0.0,
+          "partial_unexpected_counts": [],
+          "partial_unexpected_index_list": []
+        },
+        "meta": {},
+        "exception_info": {
+          "raised_exception": false,
+          "exception_traceback": null,
+          "exception_message": null
+        }
+      }
+    ],
+    "suite_name": "spotify_raw_suite",
+    "suite_parameters": {},
+    "statistics": {
+      "evaluated_expectations": 15,
+      "successful_expectations": 15,
+      "unsuccessful_expectations": 0,
+      "success_percent": 100.0
+    },
+    "meta": {
+      "great_expectations_version": "1.23.1",
+      "batch_spec": {
+        "batch_data": "PandasDataFrame"
+      },
+      "batch_markers": {
+        "ge_load_time": "20261016T032306.130433Z",
+        "pandas_data_fingerprint": "50278b7c0400d978ade235a515d15839"
+      },
+      "active_batch_definition": {
+        "datasource_name": "spotify_raw_suite_source",
+        "data_connector_name": "fluent",
+        "data_asset_name": "spotify_raw_suite_asset",
+        "batch_identifiers": {
+          "dataframe": "<DATAFRAME>"
+        }
+      },
+      "validation_id": "ecc21a11-5bbf-4c77-8471-4257bd4f9d19",
+      "checkpoint_id": null,
+      "run_id": {
+        "run_name": null,
+        "run_time": "2026-10-16T03:23:07.819446+00:00"
+      },
+      "validation_time": "2026-10-16T03:23:07.819446+00:00",
+      "batch_parameters": {
+        "dataframe": "<DATAFRAME>"
+      }
+    },
+    "id": null
+  }
+}
