@@ -1,6 +1,5 @@
 {
   "name": "spotify_raw_suite",
-  "id": "698391c9-9a02-4b40-9873-3ab8b1891abb",
   "expectations": [
     {
       "type": "expect_table_columns_to_match_set",
@@ -30,7 +29,6 @@
       "meta": {
         "rule_id": "DQ01"
       },
-      "id": "9a69e508-8d2d-4542-a6ba-788835660e4a",
       "severity": "critical"
     },
     {
@@ -41,7 +39,6 @@
       "meta": {
         "rule_id": "DQ02"
       },
-      "id": "53fed452-0585-4aca-ab04-ecf9f0138190",
       "severity": "critical"
     },
     {
@@ -53,7 +50,6 @@
       "meta": {
         "rule_id": "DQ03"
       },
-      "id": "bfe0511c-d980-4b88-93dc-2998d8428c2d",
       "severity": "critical"
     },
     {
@@ -66,7 +62,6 @@
       "meta": {
         "rule_id": "DQ04"
       },
-      "id": "924a9c92-1e22-44b9-ba5c-551e999b5a8b",
       "severity": "critical"
     },
     {
@@ -77,7 +72,6 @@
       "meta": {
         "rule_id": "DQ06"
       },
-      "id": "73b5344d-dff1-4fa4-ac0d-1f3061692043",
       "severity": "critical"
     },
     {
@@ -92,7 +86,6 @@
       "meta": {
         "rule_id": "DQ07"
       },
-      "id": "6c4a808f-49c2-45c1-a96f-944f02a846f8",
       "severity": "warning"
     },
     {
@@ -106,7 +99,6 @@
       "meta": {
         "rule_id": "DQ08"
       },
-      "id": "967b7d89-fc5a-4a0e-8a63-bdc46aece038",
       "severity": "warning"
     },
     {
@@ -119,7 +111,6 @@
       "meta": {
         "rule_id": "DQ22"
       },
-      "id": "23229be3-543e-43b8-b17c-6534b2b5c3f7",
       "severity": "info"
     },
     {
@@ -132,7 +123,6 @@
       "meta": {
         "rule_id": "DQ05"
       },
-      "id": "39dc9cb9-6ff1-4906-b383-17d97af30aa2",
       "severity": "critical"
     },
     {
@@ -145,7 +135,6 @@
       "meta": {
         "rule_id": "DQ05"
       },
-      "id": "5df078c9-dd32-4cc6-a65a-bfd0dc99d11d",
       "severity": "critical"
     },
     {
@@ -158,7 +147,6 @@
       "meta": {
         "rule_id": "DQ05"
       },
-      "id": "717e57f2-6cd2-46fe-874f-35e01cc11966",
       "severity": "critical"
     },
     {
@@ -171,7 +159,6 @@
       "meta": {
         "rule_id": "DQ05"
       },
-      "id": "e1435551-28f9-4e6d-bb3e-e38019f4faaf",
       "severity": "critical"
     },
     {
@@ -184,7 +171,6 @@
       "meta": {
         "rule_id": "DQ05"
       },
-      "id": "42d31a64-d0ef-4b99-803d-d85250e8568b",
       "severity": "critical"
     },
     {
@@ -197,7 +183,6 @@
       "meta": {
         "rule_id": "DQ05"
       },
-      "id": "c9e2fd98-9597-46ed-a328-fc640e54d0d9",
       "severity": "critical"
     },
     {
@@ -210,7 +195,6 @@
       "meta": {
         "rule_id": "DQ05"
       },
-      "id": "e74b9e8c-acc6-465c-b630-b2918ad189e9",
       "severity": "critical"
     }
   ],

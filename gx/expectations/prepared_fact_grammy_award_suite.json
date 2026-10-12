@@ -1,6 +1,5 @@
 {
   "name": "prepared_fact_grammy_award_suite",
-  "id": "427b59df-80b7-41d7-a110-ae5ff72f996a",
   "expectations": [
     {
       "type": "expect_column_values_to_not_be_null",
@@ -10,7 +9,6 @@
       "meta": {
         "rule_id": "DQ16"
       },
-      "id": "c030e6ac-51c0-41f7-9df3-01a94033a042",
       "severity": "critical"
     },
     {
@@ -21,7 +19,6 @@
       "meta": {
         "rule_id": "DQ16"
       },
-      "id": "11cd715e-2a85-4069-b07f-eb84dfe7a3af",
       "severity": "critical"
     },
     {
@@ -32,7 +29,6 @@
       "meta": {
         "rule_id": "DQ16"
       },
-      "id": "9e99baba-d975-4994-8967-d8d4de82c880",
       "severity": "critical"
     },
     {
@@ -45,7 +41,6 @@
       "meta": {
         "rule_id": "DQ19"
       },
-      "id": "6a714919-ce6f-49d5-ac9a-7951395c80e8",
       "severity": "critical"
     },
     {
@@ -58,7 +53,6 @@
       "meta": {
         "rule_id": "DQ21"
       },
-      "id": "2118aab6-f976-432b-bc80-527d1b9cd4ef",
       "severity": "warning"
     }
   ],
