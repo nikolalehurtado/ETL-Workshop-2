@@ -1,0 +1,6 @@
+patron,filas
+Spotify: ';' en artists,30075
+Grammy: ' & ' en artist,411
+Grammy: ' Featuring ' en artist,86
+"Grammy: ', ' en artist",124
+Grammy: '(' en artist,153

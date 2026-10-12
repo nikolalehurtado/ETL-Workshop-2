@@ -1,0 +1,9 @@
+condicion,filas,pct
+"Features de audio fuera de [0, 1]",0,0.0
+duration_ms = 0,1,0.0
+duration_ms > 30 minutos,36,0.03
+tempo = 0,157,0.14
+time_signature = 0,163,0.14
+loudness > 0 dB,90,0.08
+popularity = 0,16020,14.05
+"popularity fuera de [0, 100]",0,0.0

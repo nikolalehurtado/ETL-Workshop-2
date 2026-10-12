@@ -1,0 +1,5 @@
+escenario,filas_grammy_con_artista,filas_que_cruzan,artistas_distintos,artistas_distintos_que_cruzan,pct_filas_cruzan
+1. Texto exacto (sin normalizar),2970,1276,1658,517,26.5
+2. Normalizado,2970,1388,1644,538,28.9
+3. Normalizado + artista desde nominee en 'New Artist',3035,1427,1668,550,29.7
+4. Escenario 3 + solo artista principal,3035,1668,1422,610,34.7

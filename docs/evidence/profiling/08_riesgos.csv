@@ -1,0 +1,18 @@
+id,dataset_atributo,evidencia,riesgo_potencial,requerimiento
+P01,Spotify / columna sin nombre,Columna 'Unnamed: 0' = consecutivo 0..n-1,Columna sin significado que puede confundirse con un identificador,—
+P02,"Spotify / artists, track_name, album_name",1 fila con los tres campos nulos,Canción no asociable a ningún artista; rompe el cruce,"R1, R2, R3, R4"
+P03,Spotify / todas las columnas,450 duplicados exactos,Inflan conteos y promedios de popularidad y audio,"R1, R2, R3"
+P04,Spotify / track_id,16299 canciones en varios géneros; track_id no es único,Si se toma track_id como llave se pierden géneros o se duplica la canción en promedios,"R1, R2, R3"
+P05,Spotify / popularity,720 canciones con popularidad distinta según la fila,Inconsistencia: una canción con dos popularidades,"R1, R4"
+P06,"Spotify / tempo, time_signature, duration_ms",Valores en 0 (físicamente imposibles),Distorsionan el perfil sonoro,R3
+P07,Spotify / audio features,"Hoy todas en [0, 1]","Si la fuente cambia, valores fuera de rango invalidarían el perfil sonoro",R3
+P08,Spotify / popularity,14.05 % de filas con popularity = 0,Valor válido pero de alto peso en los promedios; requiere monitoreo,"R1, R4"
+P09,"Grammy / winner, year","1958-2018: máx. 2 registros por (año, categoría). 2019: 433 registros, 84 categorías con 5-8 'ganadores'",En 2019 winner no distingue ganadores de nominados: los KPIs de ganadores se inflarían,"R1, R2, R4"
+P10,Grammy / artist,"38.25 % nulos, concentrados en categorías de obra/persona",Reduce la cobertura del cruce; en 'New Artist' el artista está en nominee,"R1, R2, R4"
+P11,Grammy / artist,"Artistas múltiples en una celda (' & ', ' Featuring ', ', ')",No cruzan con Spotify o generan coincidencias falsas al separarlos,"R1, R2, R4"
+P12,Grammy / category,638 categorías; 630 ignorando mayúsculas,La misma categoría contada como distinta,R2
+P13,Grammy / title,Doble espacio en el 100 % de las filas,Problema de estandarización (bajo impacto),—
+P14,Grammy / year,"1958–2019, sin vacíos, coincide con title",Contrato a vigilar: un año fuera de rango rompería la década de R4,R4
+P15,Cruce Spotify ↔ Grammy,Solo 29.7 % de filas Grammy cruzan (escenario 3),Cobertura limitada; un cambio brusco indicaría un problema de integración,"R1, R2, R3, R4"
+P16,Cruce Spotify ↔ Grammy,87 nombres normalizados agrupan varias escrituras,Coincidencias ambiguas o duplicadas,"R1, R2, R4"
+P17,Spotify / artists,"4 créditos con 'N/A', 'Unknown' o 'Various Artists'",Nulos disfrazados que crearían artistas falsos en dim_artist,"R1, R2"

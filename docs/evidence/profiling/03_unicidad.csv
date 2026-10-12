@@ -1,0 +1,10 @@
+medida,valor
+Filas Spotify,114000
+track_id distintos,89741
+Filas con track_id repetido (sobran),24259
+Duplicados exactos (todas las columnas excepto el índice),450
+track_id presentes en más de un género,16299
+track_id con popularidad distinta entre sus filas,720
+Filas Grammy,4810
+Duplicados exactos Grammy,0
+"Duplicados por (year, category, nominee, artist)",0
