@@ -161,6 +161,15 @@ def _summarize(result):
     return sorted(rows, key=lambda x: (x["rule_id"] or "", x["expectation"]))
 
 
+def _without_ids(obj):
+    """Quita los 'id' aleatorios que GX asigna, para que la suite exportada sea estable en Git."""
+    if isinstance(obj, dict):
+        return {k: _without_ids(v) for k, v in obj.items() if k != "id"}
+    if isinstance(obj, list):
+        return [_without_ids(v) for v in obj]
+    return obj
+
+
 def run_suite(df, suite_name, run_id):
     """Valida un DataFrame contra una suite y devuelve (resumen, severidad_maxima_fallida).
 
@@ -191,7 +200,7 @@ def run_suite(df, suite_name, run_id):
     # Evidencia persistente: suite exportada y resultado completo en JSON
     (config.GX_DIR / "expectations").mkdir(parents=True, exist_ok=True)
     (config.GX_DIR / "expectations" / f"{suite_name}.json").write_text(
-        json.dumps(suite.to_json_dict(), indent=2, default=str), encoding="utf-8")
+        json.dumps(_without_ids(suite.to_json_dict()), indent=2, default=str), encoding="utf-8")
 
     summary = _summarize(result)
     out_dir = config.GX_DIR / "validation_results" / _safe(run_id)

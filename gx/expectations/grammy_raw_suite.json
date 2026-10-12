@@ -1,6 +1,5 @@
 {
   "name": "grammy_raw_suite",
-  "id": "5c1278ce-9b8a-4caf-b2c3-2ef60660d576",
   "expectations": [
     {
       "type": "expect_table_columns_to_match_set",
@@ -18,7 +17,6 @@
       "meta": {
         "rule_id": "DQ09"
       },
-      "id": "04e7ca95-41d3-4ab2-bb61-806086b64a7a",
       "severity": "critical"
     },
     {
@@ -29,7 +27,6 @@
       "meta": {
         "rule_id": "DQ10"
       },
-      "id": "dc948d34-cf08-40c9-838b-3c5d16634d11",
       "severity": "critical"
     },
     {
@@ -42,7 +39,6 @@
       "meta": {
         "rule_id": "DQ10"
       },
-      "id": "b48f3b34-bcdc-451d-aef7-29ca1029f6e4",
       "severity": "critical"
     },
     {
@@ -53,7 +49,6 @@
       "meta": {
         "rule_id": "DQ11"
       },
-      "id": "2c90ad74-0a70-415f-bb42-16f7606a52e6",
       "severity": "critical"
     },
     {
@@ -65,7 +60,6 @@
       "meta": {
         "rule_id": "DQ12"
       },
-      "id": "3d7cba00-e285-467f-b57e-2aaf0e97a78b",
       "severity": "warning"
     },
     {
@@ -80,7 +74,6 @@
       "meta": {
         "rule_id": "DQ13"
       },
-      "id": "3d6adbcf-dfb8-4c95-a8c8-66593b8af699",
       "severity": "warning"
     }
   ],
