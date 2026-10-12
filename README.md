@@ -326,8 +326,8 @@ DW conservó la carga anterior completa y el error se clasificó como determinis
 
 ## 15. Dashboard y salidas analíticas
 
-Las 4 vistas KPI viven **en el DW** (`sql/dw_schema.sql`). El dashboard consulta esas vistas o las
-tablas del modelo, nunca los CSV.
+Las 4 vistas KPI viven **en el DW** (`sql/dw_schema.sql`): el cálculo se hace en el Data Warehouse y
+el dashboard solo lo presenta.
 
 | Requerimiento | Elemento del DW / consulta | KPI / visualización | Resultado (lote entregado) |
 | --- | --- | --- | --- |
@@ -336,7 +336,33 @@ tablas del modelo, nunca los CSV.
 | R3 | `kpi_r3_audio_profile` | Barras agrupadas por característica | Las canciones de ganadores son **más acústicas (0.40 vs 0.32), menos enérgicas (0.56 vs 0.64) y menos instrumentales** |
 | R4 | `kpi_r4_popularity_by_decade` | Línea: popularidad por década del último premio | Crece de 6.6 (1950s) a 36.0 (2010s): los premiados recientes conservan más audiencia |
 
-🚧 *Dashboard en Power BI conectado a `music_dw` (localhost:5432): pendiente.*
+### Dashboard en Power BI
+
+Archivo: [`docs/Workshop2_Dashboard.pbix`](docs/Workshop2_Dashboard.pbix). Se conecta con el conector
+nativo **PostgreSQL** de Power BI a `localhost:5432`, base `music_dw`, modo **Importar**, y carga
+solo las 4 vistas KPI. **Ningún visual lee los CSV.**
+
+![E10 — Dashboard conectado a music_dw](docs/evidence/E10_dashboard.png)
+
+| Elemento | Fuente en el DW | Requerimiento |
+| --- | --- | --- |
+| Franja KPI: 549 artistas ganadores · 1.86 % con Grammy · popularidad 35.51 vs. 35.38 | `kpi_r1_popularity_by_winner` (medidas DAX que arman la franja en HTML con el visual *HTML Content*) | R1 (KPI-1, KPI-2) |
+| Columnas: popularidad por grupo, eje desde 0 y valores rotulados | `kpi_r1_popularity_by_winner` | R1 |
+| Barras horizontales: % de artistas ganadores por género | `kpi_r2_genre_winners` | R2 (KPI-3) |
+| Columnas agrupadas: acousticness, energy, danceability y valence por grupo | `kpi_r3_audio_profile` | R3 (KPI-5) |
+| Línea con marcadores: popularidad por década del último premio | `kpi_r4_popularity_by_decade` | R4 (KPI-6) |
+
+**Decisiones de visualización:**
+- **R1 con eje desde 0:** la diferencia real es de 0.13 puntos. Recortar el eje la exageraría, así
+  que se muestra a escala honesta, con los valores rotulados y el hallazgo en el subtítulo.
+- **R4 con línea recta, no suavizada:** hay 7 puntos reales, uno por década. Una curva suave inventaría
+  valores entre décadas.
+- **Cautela en R4:** las décadas de 1950 (7 artistas) y 1960 (20 artistas) tienen muestras pequeñas,
+  así que esos puntos son menos confiables que los recientes.
+
+**Para abrirlo en otro equipo:** con el entorno Docker encendido, abrir el `.pbix` → **Actualizar** →
+credenciales de tipo *Base de datos* con `POSTGRES_USER` / `POSTGRES_PASSWORD` del `.env`. Las
+credenciales no se guardan dentro del archivo.
 
 ## 16. Instalación y ejecución
 
@@ -451,9 +477,8 @@ Todas las evidencias se tomaron en el entorno Docker local (Airflow 3.1.8, Postg
 | E07 | `validate_spotify_raw` (run fallido) | [`E07_log_dq04.png`](docs/evidence/E07_log_dq04.png) | `[FAIL] DQ04 critical` (1 fila) y excepción que bloquea lo posterior | DQ04 · Critical |
 | E08 | Resultados GX de ambos runs | [`gx_results/run_exitoso/`](docs/evidence/gx_results/run_exitoso/) (5 suites) · [`gx_results/run_fallido/`](docs/evidence/gx_results/run_fallido/) (2 suites) | Resultado legible por máquina de cada suite: éxito, estadísticas y detalle por regla. El run fallido solo tiene las suites raw porque la compuerta bloqueó lo posterior; `spotify_raw_suite.json` registra `max_failure_severity: critical` y DQ04 con `success: false` | 6.6 |
 | E09 | `manual__2026-10-16T18:50:18` vs. carga anterior | [`E09a_rerun_antes.png`](docs/evidence/E09a_rerun_antes.png) · [`E09b_rerun_despues.png`](docs/evidence/E09b_rerun_despues.png) · [`E09_rerun_check.txt`](docs/evidence/E09_rerun_check.txt) | Mismos conteos, medidas y llaves tras re-ejecutar; 2 cargas auditadas | Prueba C |
-| E10 | Dashboard | `docs/evidence/E10_dashboard.png` | KPIs consultando `music_dw` | 8.1 |
+| E10 | Dashboard Power BI | [`E10_dashboard.png`](docs/evidence/E10_dashboard.png) · [`Workshop2_Dashboard.pbix`](docs/Workshop2_Dashboard.pbix) | 4 KPIs y 4 visualizaciones (R1–R4) leyendo las vistas KPI de `music_dw` | 8.1 |
 
-🚧 *Pendiente: E10 (dashboard).*
 
 ## 19. Matriz de trazabilidad de extremo a extremo
 
