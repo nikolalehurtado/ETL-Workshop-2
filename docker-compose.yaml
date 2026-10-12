@@ -76,6 +76,9 @@ services:
       - "5432:5432"
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
+      # Solo lectura: permite cargar la fuente Grammy sin poder alterar los originales
+      - ${AIRFLOW_PROJ_DIR:-.}/data/raw:/data/raw:ro
+      - ${AIRFLOW_PROJ_DIR:-.}/sql:/sql:ro
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
       interval: 10s
