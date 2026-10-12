@@ -21,3 +21,10 @@ Thumbs.db
 
 # --- Airflow: configuracion generada automaticamente ---
 config/airflow.cfg
+
+# --- Pipeline: archivos intermedios por ejecucion y lotes de prueba generados ---
+data/work/
+data/test/
+
+# --- Great Expectations: resultados por ejecucion (la evidencia elegida se copia a docs/evidence/) ---
+gx/validation_results/

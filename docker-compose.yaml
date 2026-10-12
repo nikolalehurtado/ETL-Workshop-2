@@ -22,14 +22,17 @@
 #   - Se elimina airflow-triggerer (el DAG no usa tareas diferibles)
 #   - Se desactivan los DAGs de ejemplo
 #   - Credenciales leidas desde .env (no se suben al repositorio)
-#   - Se montan data/, src/ y gx/ para el pipeline
+#   - Se montan data/, src/, gx/ y sql/ para el pipeline
+#   - Imagen propia con Great Expectations 1.23.1 (Dockerfile + requirements.txt)
 #   - Se expone PostgreSQL en el puerto 5432 para BI y notebooks
 # WARNING: configuracion para desarrollo local, no para produccion.
 # -----------------------------------------------------------------------------
 ---
 x-airflow-common:
   &airflow-common
-  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:3.1.8}
+  # Imagen propia: apache/airflow:3.1.8 + great_expectations==1.23.1 (ver Dockerfile)
+  image: ${AIRFLOW_IMAGE_NAME:-etl-workshop2-airflow:3.1.8}
+  build: .
   env_file:
     - ${ENV_FILE_PATH:-.env}
   environment:
@@ -59,6 +62,7 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/data:/opt/airflow/data
     - ${AIRFLOW_PROJ_DIR:-.}/src:/opt/airflow/src
     - ${AIRFLOW_PROJ_DIR:-.}/gx:/opt/airflow/gx
+    - ${AIRFLOW_PROJ_DIR:-.}/sql:/opt/airflow/sql:ro
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
