@@ -1,0 +1,20 @@
+﻿# --- Secretos (nunca subir) ---
+.env
+
+# --- Python ---
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- Airflow: logs generados en cada ejecucion ---
+logs/*
+!logs/.gitkeep
+
+# --- Sistema operativo / editor ---
+.DS_Store
+Thumbs.db
+.vscode/
