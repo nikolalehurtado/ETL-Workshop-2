@@ -144,7 +144,7 @@ Tabla completa en [`docs/quality_rules.md`](docs/quality_rules.md). Resumen:
 | Expectation Suites | `spotify_raw_suite`, `grammy_raw_suite`, `prepared_fact_track_artist_suite`, `prepared_fact_grammy_award_suite`, `prepared_dim_artist_suite` (exportadas en `gx/expectations/`) |
 | Validation Definition | `<suite>_validation`: batch definition del DataFrame + suite |
 | Ejecución y política | `run_suite()` → `get_max_severity_failure()` → `enforce_policy()`: Critical lanza excepción (la tarea falla), Warning/Info se registran |
-| Resultados | `gx/validation_results/<run_id>/<suite>.json`: éxito, estadísticas, **resumen por regla** (rule_id, severidad, % inesperado, valor observado) y el resultado completo de GX |
+| Resultados | `gx/validation_results/<run_id>/<suite>.json`: éxito, estadísticas, **resumen por regla** (rule_id, severidad, % inesperado, valor observado) y el resultado completo de GX. Copia de los runs de las Pruebas A y B en [`docs/evidence/gx_results/`](docs/evidence/gx_results/) |
 
 Cada Expectation lleva `meta.rule_id`; el mapeo Expectation → regla está en
 [`docs/quality_rules.md`](docs/quality_rules.md#mapeo-expectation--rule-id). Resultado con los datos
@@ -316,6 +316,10 @@ idéntico. No se duplicaron filas, no cambiaron las medidas y cada artista conse
 subrogada. Además, el run fallido de la Prueba B, que ocurrió entre ambas mediciones, no dejó
 ninguna huella en el DW. Salida completa: [`docs/evidence/E09_rerun_check.txt`](docs/evidence/E09_rerun_check.txt).
 
+| Antes (E09a) | Después (E09b) |
+| --- | --- |
+| ![E09a — DW antes de re-ejecutar](docs/evidence/E09a_rerun_antes.png) | ![E09b — DW después de re-ejecutar](docs/evidence/E09b_rerun_despues.png) |
+
 **¿Y si una carga falla a mitad de camino?** Se verificó forzando una violación de llave foránea en
 `fact_grammy_award` después de truncar y cargar las demás tablas: la transacción hizo `ROLLBACK`, el
 DW conservó la carga anterior completa y el error se clasificó como determinista (sin reintentos).
@@ -445,11 +449,11 @@ Todas las evidencias se tomaron en el entorno Docker local (Airflow 3.1.8, Postg
 | E04 | `validate_grammys_raw` (run exitoso) | [`E04_log_warning_dq13.png`](docs/evidence/E04_log_warning_dq13.png) | Resultado GX por regla; Warning DQ13 registrada y la política continúa | DQ13 · Warning |
 | E06 | `manual__2026-10-16T18:41:50` | [`E06_failed_grid.png`](docs/evidence/E06_failed_grid.png) | `validate_spotify_raw` failed; 4 tareas posteriores upstream_failed con intento 0 | Prueba B |
 | E07 | `validate_spotify_raw` (run fallido) | [`E07_log_dq04.png`](docs/evidence/E07_log_dq04.png) | `[FAIL] DQ04 critical` (1 fila) y excepción que bloquea lo posterior | DQ04 · Critical |
-| E08 | Resultados GX de ambos runs | `docs/evidence/gx_results/` | Evidencia de validación legible por máquina (éxito y falla) | 6.6 |
-| E09 | `manual__2026-10-16T18:50:18` vs. carga anterior | [`E09_rerun_check.txt`](docs/evidence/E09_rerun_check.txt) | Mismos conteos, medidas y llaves tras re-ejecutar; 2 cargas auditadas | Prueba C |
+| E08 | Resultados GX de ambos runs | [`gx_results/run_exitoso/`](docs/evidence/gx_results/run_exitoso/) (5 suites) · [`gx_results/run_fallido/`](docs/evidence/gx_results/run_fallido/) (2 suites) | Resultado legible por máquina de cada suite: éxito, estadísticas y detalle por regla. El run fallido solo tiene las suites raw porque la compuerta bloqueó lo posterior; `spotify_raw_suite.json` registra `max_failure_severity: critical` y DQ04 con `success: false` | 6.6 |
+| E09 | `manual__2026-10-16T18:50:18` vs. carga anterior | [`E09a_rerun_antes.png`](docs/evidence/E09a_rerun_antes.png) · [`E09b_rerun_despues.png`](docs/evidence/E09b_rerun_despues.png) · [`E09_rerun_check.txt`](docs/evidence/E09_rerun_check.txt) | Mismos conteos, medidas y llaves tras re-ejecutar; 2 cargas auditadas | Prueba C |
 | E10 | Dashboard | `docs/evidence/E10_dashboard.png` | KPIs consultando `music_dw` | 8.1 |
 
-🚧 *Pendientes: E08 (copiar los JSON de GX de ambos runs) y E10 (dashboard).*
+🚧 *Pendiente: E10 (dashboard).*
 
 ## 19. Matriz de trazabilidad de extremo a extremo
 
