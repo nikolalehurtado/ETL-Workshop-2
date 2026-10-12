@@ -1,0 +1,213 @@
+{
+  "name": "prepared_fact_track_artist_suite",
+  "id": "b2f7f501-2f2d-468a-89ac-a7a80013db1c",
+  "expectations": [
+    {
+      "type": "expect_table_columns_to_match_set",
+      "kwargs": {
+        "column_set": [
+          "track_key",
+          "artist_key",
+          "genre_key",
+          "artist_position",
+          "popularity",
+          "tempo",
+          "loudness",
+          "danceability",
+          "energy",
+          "speechiness",
+          "acousticness",
+          "instrumentalness",
+          "liveness",
+          "valence"
+        ],
+        "exact_match": false
+      },
+      "meta": {
+        "rule_id": "DQ14"
+      },
+      "id": "2a3d2c92-974a-47f0-96ad-47c44f834284",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_compound_columns_to_be_unique",
+      "kwargs": {
+        "column_list": [
+          "track_key",
+          "artist_key",
+          "genre_key"
+        ]
+      },
+      "meta": {
+        "rule_id": "DQ15"
+      },
+      "id": "21b94700-4f0e-49cb-b511-3d645f7f7765",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "track_key"
+      },
+      "meta": {
+        "rule_id": "DQ16"
+      },
+      "id": "d031ae41-d77a-4fb9-b10f-a540f53a9721",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "artist_key"
+      },
+      "meta": {
+        "rule_id": "DQ16"
+      },
+      "id": "271b19e5-6228-4e64-8527-b0b94e4dc5d4",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "genre_key"
+      },
+      "meta": {
+        "rule_id": "DQ16"
+      },
+      "id": "35d98a45-6b14-4636-83b3-6f2cd4dab576",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "popularity",
+        "min_value": 0.0,
+        "max_value": 100.0
+      },
+      "meta": {
+        "rule_id": "DQ17"
+      },
+      "id": "f1aadd03-fb83-487e-a684-f8b3aeb73415",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "popularity"
+      },
+      "meta": {
+        "rule_id": "DQ17"
+      },
+      "id": "167192e6-741e-4a7f-95fa-fe283ba9e55f",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "tempo",
+        "min_value": 0.0,
+        "strict_min": true
+      },
+      "meta": {
+        "rule_id": "DQ18"
+      },
+      "id": "0957bd7f-ec0f-46c4-94cb-8035bb32dcca",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "danceability",
+        "min_value": 0.0,
+        "max_value": 1.0
+      },
+      "meta": {
+        "rule_id": "DQ17"
+      },
+      "id": "0add444d-31f1-44d8-b72a-a642a78ee41e",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "energy",
+        "min_value": 0.0,
+        "max_value": 1.0
+      },
+      "meta": {
+        "rule_id": "DQ17"
+      },
+      "id": "74f7fd1a-50c0-43e8-9a6c-b8f180b28e71",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "speechiness",
+        "min_value": 0.0,
+        "max_value": 1.0
+      },
+      "meta": {
+        "rule_id": "DQ17"
+      },
+      "id": "937e412e-9ce4-4781-9fad-28e5c9e0d322",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "acousticness",
+        "min_value": 0.0,
+        "max_value": 1.0
+      },
+      "meta": {
+        "rule_id": "DQ17"
+      },
+      "id": "105a5a7a-f85d-47ea-bb88-8525fc6380fb",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "instrumentalness",
+        "min_value": 0.0,
+        "max_value": 1.0
+      },
+      "meta": {
+        "rule_id": "DQ17"
+      },
+      "id": "0c74d465-62cf-402d-8a09-d6705264b7ef",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "liveness",
+        "min_value": 0.0,
+        "max_value": 1.0
+      },
+      "meta": {
+        "rule_id": "DQ17"
+      },
+      "id": "2ebe7895-6881-41cd-b370-1cbe7def9866",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "valence",
+        "min_value": 0.0,
+        "max_value": 1.0
+      },
+      "meta": {
+        "rule_id": "DQ17"
+      },
+      "id": "15fd631a-cbb6-4df1-a896-09767d223f4c",
+      "severity": "critical"
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "1.23.1"
+  },
+  "notes": null
+}
