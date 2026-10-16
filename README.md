@@ -77,8 +77,8 @@ primer error (`ON_ERROR_STOP`).
 | Conciliación de filas | Valor |
 | --- | --- |
 | Registros en el CSV (sin encabezado) | 4,810 (4,811 líneas físicas: no hay saltos de línea dentro de los campos) |
-| Filas en `grammy_awards` tras la carga | 4,810 ✅ |
-| Filas tras re-ejecutar el script | 4,810 ✅ (no duplica) |
+| Filas en `grammy_awards` tras la carga | 4,810  |
+| Filas tras re-ejecutar el script | 4,810  (no duplica) |
 
 La tarea `extract_grammys` lee **desde esta base de datos**, nunca desde el CSV (ver
 `src/extract.py` y el log de la tarea, que muestra `source: postgresql://postgres/grammy_source.grammy_awards`).
@@ -114,7 +114,7 @@ datos; guarda tablas de evidencia en [`docs/evidence/profiling/`](docs/evidence/
 
 | Hallazgo | Evidencia | Consecuencia |
 | --- | --- | --- |
-| 🔴 **El lote 2019 de Grammy mezcla nominados con ganadores** | 1958–2018: ~1 registro por (año, categoría), máximo 2 (empates). 2019: 433 registros, 84 categorías con 5–8 "ganadores", todos `winner = True` | Cuarentena del lote (T09); análisis de ganadores 1958–2018 |
+|  **El lote 2019 de Grammy mezcla nominados con ganadores** | 1958–2018: ~1 registro por (año, categoría), máximo 2 (empates). 2019: 433 registros, 84 categorías con 5–8 "ganadores", todos `winner = True` | Cuarentena del lote (T09); análisis de ganadores 1958–2018 |
 | `artist` vacío en 38 % de Grammy | Concentrado en categorías de obra o persona; en *New Artist* el artista está en `nominee` | T10 / T11; baja cobertura esperada |
 | `track_id` no es único en Spotify | 89,741 ids en 114,000 filas: la granularidad es canción × género | El grano del hecho incluye el género |
 | 450 duplicados exactos y 720 canciones con dos popularidades | Tabla `03_unicidad.csv` | T03 y T04 |
@@ -148,7 +148,7 @@ Tabla completa en [`docs/quality_rules.md`](docs/quality_rules.md). Resumen:
 
 Cada Expectation lleva `meta.rule_id`; el mapeo Expectation → regla está en
 [`docs/quality_rules.md`](docs/quality_rules.md#mapeo-expectation--rule-id). Resultado con los datos
-entregados: Spotify ✅, Grammy ⚠️ Warning DQ13 (lote 2019), suites preparadas ✅.
+entregados: Spotify , Grammy  Warning DQ13 (lote 2019), suites preparadas .
 
 ## 8. Estrategia de transformación e integración
 
@@ -227,9 +227,9 @@ entorno Docker local. **Resultado: 8 de 8 tareas en `success`, duración 2 min 0
 | Etapa | Resultado observado |
 | --- | --- |
 | Extracción | Spotify 114,000 filas (CSV) · Grammy 4,810 filas desde PostgreSQL `grammy_source` |
-| Compuertas raw | `spotify_raw_suite` ✅ · `grammy_raw_suite` ✅ con **Warning DQ13** (10.29 % de filas repetidas por año y categoría: lote 2019) → la política permite continuar |
+| Compuertas raw | `spotify_raw_suite`  · `grammy_raw_suite` ✅ con **Warning DQ13** (10.29 % de filas repetidas por año y categoría: lote 2019) → la política permite continuar |
 | Transformación | 433 filas de 2019 en cuarentena; 1,472 de 2,771 premios emparejados con Spotify (53.1 %) |
-| Compuerta preparada | ✅ las 3 suites |
+| Compuerta preparada | las 3 suites |
 | Carga | `fact_track_artist` 156,739 · `fact_grammy_award` 2,771 · `dim_artist` 30,249 → `COMMIT` |
 | Analítica | `kpi_summary.json` con las 4 vistas KPI |
 
@@ -259,9 +259,9 @@ Luego, en Airflow: **Trigger** → parámetro `spotify_file = spotify_bad_popula
 
 | Tarea | Estado observado | Intento |
 | --- | --- | --- |
-| `extract_spotify`, `extract_grammys`, `validate_grammys_raw` | ✅ success | 1 |
-| `validate_spotify_raw` | ❌ **failed** | 1 (0 reintentos: falla determinista) |
-| `transform_and_integrate`, `validate_prepared`, `load_dw`, `publish_kpi_summary` | 🟠 **upstream_failed** | 0 (nunca se ejecutaron) |
+| `extract_spotify`, `extract_grammys`, `validate_grammys_raw` | success | 1 |
+| `validate_spotify_raw` | **failed** | 1 (0 reintentos: falla determinista) |
+| `transform_and_integrate`, `validate_prepared`, `load_dw`, `publish_kpi_summary` |  **upstream_failed** | 0 (nunca se ejecutaron) |
 | Data Warehouse | Sin cambios (`etl_load_audit` siguió con 1 carga; ver E09) | — |
 
 ![E06 — DAG Run con falla controlada](docs/evidence/E06_failed_grid.png)
@@ -490,3 +490,4 @@ Todas las evidencias se tomaron en el entorno Docker local (Airflow 3.1.8, Postg
 | R2 | Spotify `track_genre` | P04 canción en varios géneros | DQ06 / DQ15 | `ExpectColumnValuesToNotBeNull(track_genre)` / `ExpectCompoundColumnsToBeUnique(track_key, artist_key, genre_key)` | T13 grano canción × artista × género | `dim_genre`, `fact_track_artist` | KPI-3 (`kpi_r2_genre_winners`) |
 | R3 | Spotify características de audio, `tempo` | P06 valores imposibles | DQ05 / DQ08 / DQ18 | `ExpectColumnValuesToBeBetween(..., 0, 1)` / `tempo > 0` | T05 → nulo | `fact_track_artist` | KPI-5 (`kpi_r3_audio_profile`) |
 | R4 | Grammy `year` | P14 contrato del año | DQ10 | `ExpectColumnValuesToBeBetween(year, 1958, año actual)` | — | `dim_year.decade`, `dim_artist.last_award_decade` | KPI-6 (`kpi_r4_popularity_by_decade`) |
+
